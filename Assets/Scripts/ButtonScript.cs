@@ -13,4 +13,10 @@ public class ButtonScript : MonoBehaviour {
 	public int getY(){
 		return y;
 	}
+
+    public void setSelected()
+    {
+        GameControler gc = GameObject.FindWithTag("GameController").GetComponent<GameControler>();
+        gc.setLetterHighlighted(getX(), getY());
+    }
 }

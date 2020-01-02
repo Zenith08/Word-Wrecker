@@ -7,7 +7,7 @@ public class GameControler : MonoBehaviour {
 
 	//The places the letters start off.
 	public GameObject[] startPoints = new GameObject[9];
-
+    
 	public GameObject letterRef;
 
 	//Temp for testing
@@ -21,17 +21,26 @@ public class GameControler : MonoBehaviour {
 	//State 0 = Starting, State 1 = Playable, State 2 = somthing else.
 	public int GAME_STATE = 0;
 
-	//Difficulty 0 = Easy, 1 = Normal, 2 = Hard, 3 = Lunatic, 4 = Somthing else.
-	public int DIFFICULTY = 0;
+    //Difficulty 0 = Easy, 1 = Normal, 2 = Hard, 3 = Lunatic, 4 = Somthing else.
+    public static readonly int EASY = 0;
+    public static readonly int NORMAL = 1;
+    public static readonly int HARD = 2;
+
+	public int DIFFICULTY = NORMAL;
 
 	private SaveGameHandler saveGameHandler = new SaveGameHandler(); //Really it's just a convenience class.
 
 	private bool loadSaveGame;
 
+    //Allows letters to light up when tapped (in theory)
+    private List<TextScript> highlighted = new List<TextScript>();
+
     //Allows async api calls.
-    bool isPendingWord = false;
-    string word;
-    List<Vector2> lettersUsed;
+    public int PendingTimeout = 3 * 30;
+    public bool isPendingWord = false;
+    private string word;
+    private int pendingTime = 0;
+    private List<Vector2> lettersUsed;
 
     // Use this for initialization
     void Start () {
@@ -47,25 +56,19 @@ public class GameControler : MonoBehaviour {
 			scoreDisplay.text = "Score: " + score;
 		}
     }
-
-//	bool rowCreated = false;
+    
 	int waitTime = 1;
 
 	// Update is called once per frame
 	void Update () {
 		if (GAME_STATE == 0) {
-            //			Debug.Log ("GAME_STATE = 0");
-            //debugText.text = "GS = 0";
 			waitTime--;
-	//			Debug.Log ("Wait Time = " + waitTime);
 			if (waitTime == 0) {
-	//				Debug.Log ("Wait Time = 0");
 				waitTime = 30;
 				bool rowCreated = false;
 				//Instantiate letters then put them in the array
 				for (int i = 0; i < board.Length; i++) {
 					if (board [i].Count < 15) {
-//					debugText.text = "Board Width = " + board.Length;
 						GameObject nextLetter = Instantiate (letterRef);
 						TextScript ts = nextLetter.GetComponent<TextScript> ();
 						//Handles Save Game stuff
@@ -84,13 +87,41 @@ public class GameControler : MonoBehaviour {
 					loadSaveGame = false;
 					saveGameHandler.saveData (this);
 					GAME_STATE = 1;
-					//debugText.text = "GS=1";
 				}
 			}
 		}else if (GAME_STATE == 1) {
-            //debugText.text = "GS = 1";
+            if (isPendingWord)
+            {
+                pendingTime--;
+                if(pendingTime <= 0)
+                {
+                    Debug.Log("Failed API Call for " + word);
+                    foreach(Vector2 v in lettersUsed)
+                    {
+                        board[(int)v.x][(int)v.y].setFailiureState(true);
+                    }
+                    isPendingWord = false;
+                }
+            }
 		}
 	}
+
+    public void setLetterHighlighted(int x, int y)
+    {
+        getFromBoard(x, y).setHighlighted(true);
+        highlighted.Add(getFromBoard(x, y));
+    }
+
+    private void dehighlight()
+    {
+        //Unhighlight all letters first
+        foreach (TextScript letter in highlighted)
+        {
+            if(letter != null)
+                letter.setHighlighted(false);
+        }
+        highlighted.Clear();
+    }
 		
 	private TextScript getFromBoard(int x, int y){
 		return board [x] [y];
@@ -98,6 +129,7 @@ public class GameControler : MonoBehaviour {
 
     //A is the starting position, B is the final position.
     public void collectLetters(int ax, int ay, int bx, int by){
+        //Then process
         if (!isPendingWord)
         {
             //Have to calculate which grid position it is before this is called!
@@ -132,11 +164,15 @@ public class GameControler : MonoBehaviour {
             int nADeltaX = xFinal - ax;
             int nADeltaY = yFinal - ay;
 
+            dehighlight();
+            //Now collect letters
+
             //Get all the letters of the selected word
             do
             {
                 word += board[x][y].getLetter();
                 lettersUsed.Add(new Vector2(x, y));
+                setLetterHighlighted(x, y);
 
                 if (nADeltaX > 0)
                 {
@@ -162,6 +198,7 @@ public class GameControler : MonoBehaviour {
             } while (nADeltaX != 0 || nADeltaY != 0);
             //Adds the final letter into the word because otherwise it wouldn't be added in properly
             word += board[xFinal][yFinal].getLetter();
+            setLetterHighlighted(xFinal, yFinal);
             lettersUsed.Add(new Vector2(xFinal, yFinal));
             //End last letter bug fix
 
@@ -175,17 +212,42 @@ public class GameControler : MonoBehaviour {
                 }
             }
             //End one letter bug fix
-
-            //Activate async call
-            WordDictionaryHandler.checkOxford(word);
-            debugText.text = "PW: " + word;
-            isPendingWord = true;
+            //Difficulty implementation
+            if(lettersUsed.Count == 1) //1 letter words are only allowed on easy difficulty
+            {
+                if (DIFFICULTY > EASY) //Easy = 0 so > EASY makes sense.
+                {
+                    //Don't allow word
+                    debugText.text = "PW: " + word; //This is needed so that the callback understands what it's doing
+                    isPendingWord = true;
+                    pendingTime = PendingTimeout;
+                    validWordCallback(false);
+                }
+                else
+                {
+                    if (word.Equals("A") || word.Equals("I")) //These are the only actual 1 letter words so we can just allow them.
+                    {
+                        debugText.text = "PW: " + word; //Also for the callback to make sense.
+                        isPendingWord = true;
+                        pendingTime = PendingTimeout;
+                        validWordCallback(true);
+                    }
+                }
+            }
+            else //If its a more than one letter word we can let the dictionary deal with it.
+            {
+                //Activate async call
+                debugText.text = "PW: " + word;
+                isPendingWord = true;
+                pendingTime = PendingTimeout;
+                WordDictionaryHandler.CheckOxford(word);
+                //WordDictionaryHandler.CheckLocalDB(word);
+            }
         }
 	}
 
     public void validWordCallback(bool validWord)
     {
-        //TODO remove check for original dictionary
         if (isPendingWord && validWord)
         { //If the word is valid then score the points and destroy the letters
             debugText.text = "V " + word;
@@ -213,6 +275,7 @@ public class GameControler : MonoBehaviour {
 
                     GameObject destroyGO = board[destroyX][destroyY].gameObject;
                     board[destroyX].RemoveAt(destroyY);
+                    //Does not remove from highlighted list, definatly going to be an issue.
                     Destroy(destroyGO);
                 }
             }
@@ -220,9 +283,6 @@ public class GameControler : MonoBehaviour {
             { //The normal loop
                 for (int i = 0; i < lettersUsed.Count; i++)
                 {
-                    Debug.Log("D L Loop " + i + " address " + (lettersUsed.Count - 1 - i));
-                    Debug.Log("Value: " + lettersUsed[lettersUsed.Count - 1 - i].x + ", " + lettersUsed[lettersUsed.Count - 1 - i].y);
-
                     int destroyX = (int)lettersUsed[lettersUsed.Count - 1 - i].x;
                     int destroyY = (int)lettersUsed[lettersUsed.Count - 1 - i].y;
 
@@ -238,6 +298,10 @@ public class GameControler : MonoBehaviour {
         {
             isPendingWord = false;
             debugText.text = "F " + word;
+            foreach(Vector2 v in lettersUsed)
+            {
+                board[(int)v.x][(int)v.y].setFailiureState(false);
+            }
         }
     }
 

@@ -4,10 +4,11 @@ using System.Net;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using System.Data.Odbc;
+using System;
 
 public static class WordDictionaryHandler {
-
-	private static Dictionary<string, bool> words;
+    
 	public static bool dictionaryReady = false;
     
 	private static char[] letters;
@@ -33,13 +34,46 @@ public static class WordDictionaryHandler {
 
 		dictionaryReady = true; //Has to happen last
 	}
-    
-    public static async void checkOxford(string word)
+
+    /*
+    public static void CheckLocalDB(string word)
     {
+        string con = "Driver={Words};";
+        //string con = "Provider = Microsoft.ACE.OLEDB.12.0; Data Source = D:/UnityEngine/HelloSql.accdb; Persist Security Info = False;";
+        Debug.Log(con);
+        OdbcConnection oCon = new OdbcConnection(con);
+        try
+        {
+            oCon.Open();
+            string query = "SELECT * FROM scrabble";
+            OdbcCommand command = new OdbcCommand(query);
+            command.Connection = oCon;
+            command.ExecuteNonQuery();
+            oCon.Close();
+        }
+        catch(Exception ex)
+        {
+            Debug.Log(ex.ToString());
+        }
+        finally
+        {
+            if(oCon.State != System.Data.ConnectionState.Closed)
+            {
+                oCon.Close();
+            }
+            oCon.Dispose();
+        }
+        SendAsyncResult(false);
+    }
+    */
+
+    public static async void CheckOxford(string word)
+    {
+        string check = word.ToLower();
         //Tests the oxford dictionary:
         //Online to oxford Entries
         HttpWebRequest req = null;
-        string uri = PrimeUrl + word;
+        string uri = PrimeUrl + check;
 
         req = (HttpWebRequest)WebRequest.Create(uri);
 
@@ -51,7 +85,7 @@ public static class WordDictionaryHandler {
         req.Accept = "application/json";
 
         //Tries with lemmas
-        string luri = lemmas + word;
+        string luri = lemmas + check;
 
         HttpWebRequest lreq = (HttpWebRequest)WebRequest.Create(luri);
 
@@ -66,7 +100,7 @@ public static class WordDictionaryHandler {
         {
             await req.GetResponseAsync();
             //Word exists
-            sendAsyncResult(true);
+            SendAsyncResult(true);
         }
         catch (WebException)
         {
@@ -75,63 +109,22 @@ public static class WordDictionaryHandler {
             {
                 await lreq.GetResponseAsync();
                 //Exists in lemmas
-                sendAsyncResult(true);
+                SendAsyncResult(true);
             }
             catch (WebException)
             {
                 //Does not exist
-                sendAsyncResult(false);
+                SendAsyncResult(false);
             }
         }
     }
 
-    private static void sendAsyncResult(bool result)
+    private static void SendAsyncResult(bool result)
     {
         GameControler gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControler>();
         gc.validWordCallback(result);
     }
-
-    private static bool DoRequestAsync(HttpWebRequest req, string word) { 
-        try
-        {
-            using (HttpWebResponse HWR_Response = (HttpWebResponse)req.GetResponse())
-            using (Stream respStream = HWR_Response.GetResponseStream())
-            using (StreamReader sr = new StreamReader(respStream, Encoding.UTF8))
-            {
-               return true;
-            }
-        }
-        catch (WebException)
-        {
-            //Tries with lemmas
-            string luri = lemmas + word;
-
-            req = (HttpWebRequest)WebRequest.Create(luri);
-
-            //These are not network credentials, just custom headers
-            req.Headers.Add("app_id", oxid);
-            req.Headers.Add("app_key", oxkey);
-
-            req.Method = WebRequestMethods.Http.Get;
-            req.Accept = "application/json";
-
-            try
-            {
-                using (HttpWebResponse HWR_Response = (HttpWebResponse)req.GetResponse())
-                using (Stream respStream = HWR_Response.GetResponseStream())
-                using (StreamReader sr = new StreamReader(respStream, Encoding.UTF8))
-                {
-                    return true;
-                }
-            }
-            catch (WebException)
-            {
-                return false;
-            }
-        }
-        //End oxford stuff
-    }
-
+    
     public static char[] getLetters (){
 		if (!dictionaryReady) {
 			asyncInitalization ();

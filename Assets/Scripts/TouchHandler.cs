@@ -7,11 +7,6 @@ public class TouchHandler : MonoBehaviour {
 	private Vector2 startTouch;
 	private int startX, startY, endX, endY;
 	private Vector2 endTouch;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
@@ -19,12 +14,15 @@ public class TouchHandler : MonoBehaviour {
 			if (Input.touchCount == 1) {
 				Touch touch = Input.GetTouch (0);
 				RaycastHit touchedObject;
-//				Debug.Log ("Touch Detected");
 				if (Physics.Raycast (Camera.main.ScreenPointToRay (new Vector3 (touch.position.x, touch.position.y, 0)), out touchedObject, 200F)) {
 					if (touchedObject.collider != null) {
 						if (touchedObject.collider.gameObject.tag == "Button") {
-//							Debug.Log ("Raycast worked");
-							ButtonScript button = touchedObject.collider.gameObject.GetComponent<ButtonScript> ();
+                            ButtonScript button = touchedObject.collider.gameObject.GetComponent<ButtonScript>();
+
+                            if (!GetComponent<GameControler>().isPendingWord)
+                            {    
+                                button.setSelected();
+                            }
 
 							if (touch.phase == TouchPhase.Began) {
 								startTouch = touch.position;

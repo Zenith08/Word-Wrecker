@@ -1,35 +1,47 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TextScript : MonoBehaviour {
 
+    public static Color normal = Color.white;
+    public static Color highlighted = Color.blue;
+    public static Color fail = Color.red;
+    public static Color error = Color.yellow;
+
 	public int speed = 5;
+    public int ErrorTime = 2 * 30;
 
 	private TextMesh displayText;
 	private char characterValue;
 	private Rigidbody rb;
 	private bool falling = false;
 	public byte fallTimer = 2;
-
-	// Use this for initialization
-	void Start () {
+    private int errTime;
+    
+    // Use this for initialization
+    void Start () {
 		displayText = GetComponent<TextMesh> ();
+        GetComponent<MeshRenderer>().enabled = false;
 		rb = GetComponent<Rigidbody> ();
 		falling = true;
-		//TEMP
-//		setLetter('a');
 	}
-		
+
 	// Update is called once per frame
 	void Update () {
 		if (displayText.text != characterValue.ToString ()) {
 			displayText.text = characterValue.ToString ();
+            GetComponent<MeshRenderer>().enabled = true;
 		}
+        if(errTime > 0)
+        {
+            errTime--;
+            if(errTime == 0)
+            {
+                setHighlighted(false);
+            }
+        }
 	}
 
 	void FixedUpdate(){
-	//	Debug.Log ("Falling = " + falling);
 		if (falling) {
 			rb.MovePosition (rb.transform.position + Vector3.down * Time.deltaTime * speed);
 		} else {
@@ -50,14 +62,12 @@ public class TextScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-	//	Debug.Log ("On Trigger Enter");
 		if (other.tag == "Letter" || other.tag == "Ground") {
 			falling = false;
 		}
 	}
 
 	void OnTriggerExit(){
-	//	Debug.Log ("On Trigger Exit");
 		falling = true;
 	}
 
@@ -69,4 +79,31 @@ public class TextScript : MonoBehaviour {
 	public char getLetter(){
 		return characterValue;
 	}
+
+    public void setHighlighted(bool highlight)
+    {
+        TextMesh tm = GetComponent<TextMesh>();
+        if (highlight)
+        {
+            tm.color = highlighted;
+        }
+        else
+        {
+            tm.color = normal;
+        }
+    }
+
+    public void setFailiureState(bool internalError)
+    {
+        errTime = ErrorTime;
+        TextMesh tm = GetComponent<TextMesh>();
+        if (internalError)
+        {
+            tm.color = error;
+        }
+        else
+        {
+            tm.color = fail;
+        }
+    }
 }

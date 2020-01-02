@@ -23,6 +23,7 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/_Scenes/MWSMainGameplay.unity:
@@ -63,21 +64,21 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9876}
+      Script: {instanceID: 9878}
     - Class: 114
-      Script: {instanceID: 10012}
+      Script: {instanceID: 10014}
     - Class: 114
-      Script: {instanceID: 10170}
+      Script: {instanceID: 10172}
     - Class: 114
-      Script: {instanceID: 10758}
+      Script: {instanceID: 10760}
     - Class: 114
-      Script: {instanceID: 10982}
+      Script: {instanceID: 10984}
     - Class: 114
-      Script: {instanceID: 11554}
+      Script: {instanceID: 11556}
     - Class: 114
-      Script: {instanceID: 11872}
+      Script: {instanceID: 11874}
     - Class: 114
-      Script: {instanceID: 11928}
+      Script: {instanceID: 11930}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -128,27 +129,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9782}
     - Class: 114
-      Script: {instanceID: 9882}
-    - Class: 114
       Script: {instanceID: 9884}
     - Class: 114
-      Script: {instanceID: 9956}
+      Script: {instanceID: 9886}
     - Class: 114
-      Script: {instanceID: 9986}
+      Script: {instanceID: 9958}
     - Class: 114
-      Script: {instanceID: 10220}
+      Script: {instanceID: 9988}
     - Class: 114
-      Script: {instanceID: 10952}
+      Script: {instanceID: 10222}
     - Class: 114
-      Script: {instanceID: 11016}
+      Script: {instanceID: 10954}
     - Class: 114
-      Script: {instanceID: 11264}
+      Script: {instanceID: 11018}
     - Class: 114
-      Script: {instanceID: 11326}
+      Script: {instanceID: 11266}
     - Class: 114
-      Script: {instanceID: 11410}
+      Script: {instanceID: 11328}
     - Class: 114
-      Script: {instanceID: 11928}
+      Script: {instanceID: 11412}
+    - Class: 114
+      Script: {instanceID: 11930}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 121
@@ -292,7 +293,7 @@ ScriptsOnlyBuild:
     className: Hose
   - hash:
       serializedVersion: 2
-      Hash: c1f91d547a483883fa68b1b98df6ddea
+      Hash: c84e6c8a0e419a2575ecdeba23fcf9e4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameControler
@@ -808,7 +809,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 8c9ac0ca3efdd558fed2a3bf56c132f7
+      Hash: b768c15ecb430436559d2c01541cccba
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TextScript
