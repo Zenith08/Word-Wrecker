@@ -240,7 +240,8 @@ public class GameControler : MonoBehaviour {
                 debugText.text = "PW: " + word;
                 isPendingWord = true;
                 pendingTime = PendingTimeout;
-                WordDictionaryHandler.CheckOxford(word);
+                WordDictionaryHandler.CheckJavaDB(word);
+                //WordDictionaryHandler.CheckOxford(word);
                 //WordDictionaryHandler.CheckLocalDB(word);
             }
         }

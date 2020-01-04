@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Net;
-using System.IO;
 using System.Text;
 using UnityEngine;
-using System.Data.Odbc;
-using System;
+using System.Net.Sockets;
 
 public static class WordDictionaryHandler {
     
@@ -66,6 +64,35 @@ public static class WordDictionaryHandler {
         SendAsyncResult(false);
     }
     */
+
+    public static async void CheckJavaDB(string word)
+    {
+        Debug.Log("Checking word " + word);
+        string check = word.ToLower();
+
+        var client = new UdpClient();
+        IPEndPoint ep = new IPEndPoint(IPAddress.Parse("192.168.1.9"), 4445); // endpoint where server is listening
+        client.Connect(ep);
+
+        // send data
+        byte[] bts = Encoding.ASCII.GetBytes(check);
+        client.Send(bts, bts.Length);
+        Debug.Log("Sent request");
+        // then receive data
+        UdpReceiveResult receivedData = await client.ReceiveAsync();
+
+        string res = Encoding.ASCII.GetString(receivedData.Buffer);
+        if(res == "true")
+        {
+            SendAsyncResult(true);
+        }
+        else
+        {
+            SendAsyncResult(false);
+        }
+
+        Debug.Log("receive data from " + ep.ToString() + " saying " + receivedData.ToString() + " or " + Encoding.ASCII.GetString(receivedData.Buffer));
+    }
 
     public static async void CheckOxford(string word)
     {
