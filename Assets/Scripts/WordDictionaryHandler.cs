@@ -16,8 +16,9 @@ public static class WordDictionaryHandler {
 
     //Oxford API
     //CRITICAL: Move api keys to different file for gitignoring.
-    private static string oxid = Keys.oxford_api_id;
-    private static string oxkey = Keys.oxford_api_key;
+    //private static string oxid = Keys.oxford_api_id;
+    //private static string oxkey = Keys.oxford_api_key;
+    private static string oxid = "", oxkey = "";
     private static string PrimeUrl = "https://od-api.oxforddictionaries.com/api/v2/entries/en/";
     private static string lemmas = "https://od-api.oxforddictionaries.com/api/v2/lemmas/en/";
 
@@ -71,7 +72,7 @@ public static class WordDictionaryHandler {
         string check = word.ToLower();
 
         var client = new UdpClient();
-        IPEndPoint ep = new IPEndPoint(IPAddress.Parse("192.168.1.9"), 4445); // endpoint where server is listening
+        IPEndPoint ep = new IPEndPoint(IPAddress.Parse("54.172.6.133"), 4445); // endpoint where server is listening
         client.Connect(ep);
 
         // send data
