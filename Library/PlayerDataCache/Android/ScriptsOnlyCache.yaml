@@ -4,11 +4,14 @@ ScriptsOnlyBuild:
     - UnityStandardAssets.Water.Water
     - UnityStandardAssets.Water.WaterBasic
     Assembly-CSharp.dll:
+    - BackToMenue
     - ButtonHolder
     - ButtonScript
     - CameraController
     - GameControler
+    - GameData
     - IntroSunScript
+    - MenueManager
     - ScalabilityControler
     - SmokeControler
     - TextScript
@@ -22,6 +25,15 @@ ScriptsOnlyBuild:
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
+    UnityEngine.UI.dll:
+    - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.Button
+    - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.Image
+    - UnityEngine.UI.Text
+    - UnityEngine.UI.VerticalLayoutGroup
     com.unity.multiplayer-hlapi.Runtime.dll:
     - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
@@ -64,21 +76,37 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: 9736}
+    - Class: 114
       Script: {instanceID: 9878}
     - Class: 114
-      Script: {instanceID: 10014}
+      Script: {instanceID: 9946}
     - Class: 114
-      Script: {instanceID: 10172}
+      Script: {instanceID: 10002}
     - Class: 114
-      Script: {instanceID: 10760}
+      Script: {instanceID: 10018}
     - Class: 114
-      Script: {instanceID: 10984}
+      Script: {instanceID: 10176}
     - Class: 114
-      Script: {instanceID: 11556}
+      Script: {instanceID: 10512}
     - Class: 114
-      Script: {instanceID: 11874}
+      Script: {instanceID: 10764}
     - Class: 114
-      Script: {instanceID: 11930}
+      Script: {instanceID: 10988}
+    - Class: 114
+      Script: {instanceID: 11028}
+    - Class: 114
+      Script: {instanceID: 11560}
+    - Class: 114
+      Script: {instanceID: 11606}
+    - Class: 114
+      Script: {instanceID: 11878}
+    - Class: 114
+      Script: {instanceID: 11934}
+    - Class: 114
+      Script: {instanceID: 12078}
+    - Class: 114
+      Script: {instanceID: 26398}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -91,9 +119,68 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 199
       Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
     - Class: 258
+      Script: {instanceID: 0}
+    Assets/_Scenes/MainMenue.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9736}
+    - Class: 114
+      Script: {instanceID: 9946}
+    - Class: 114
+      Script: {instanceID: 9956}
+    - Class: 114
+      Script: {instanceID: 9962}
+    - Class: 114
+      Script: {instanceID: 10002}
+    - Class: 114
+      Script: {instanceID: 10512}
+    - Class: 114
+      Script: {instanceID: 11028}
+    - Class: 114
+      Script: {instanceID: 11134}
+    - Class: 114
+      Script: {instanceID: 11606}
+    - Class: 114
+      Script: {instanceID: 12078}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
     Assets/_Scenes/ZenithCorpsIntro.unity:
     - Class: 1
@@ -133,23 +220,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9886}
     - Class: 114
-      Script: {instanceID: 9958}
+      Script: {instanceID: 9960}
     - Class: 114
-      Script: {instanceID: 9988}
+      Script: {instanceID: 9992}
     - Class: 114
-      Script: {instanceID: 10222}
+      Script: {instanceID: 10226}
     - Class: 114
-      Script: {instanceID: 10954}
+      Script: {instanceID: 10958}
     - Class: 114
-      Script: {instanceID: 11018}
+      Script: {instanceID: 11022}
     - Class: 114
-      Script: {instanceID: 11266}
+      Script: {instanceID: 11270}
     - Class: 114
-      Script: {instanceID: 11328}
+      Script: {instanceID: 11332}
     - Class: 114
-      Script: {instanceID: 11412}
+      Script: {instanceID: 11416}
     - Class: 114
-      Script: {instanceID: 11930}
+      Script: {instanceID: 11934}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 121
@@ -263,10 +350,22 @@ ScriptsOnlyBuild:
     className: Scrollbar
   - hash:
       serializedVersion: 2
+      Hash: 43298df845da81163164dd4c8d9ba01d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameData
+  - hash:
+      serializedVersion: 2
       Hash: eafb77726b67b7571818a7210a3ce11e
     assemblyName: com.unity.multiplayer-hlapi.Runtime.dll
     namespaceName: UnityEngine.Networking
     className: NetworkIdentity
+  - hash:
+      serializedVersion: 2
+      Hash: 495e5277d796f29e6d94a70f784b1272
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MenueManager
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -761,7 +860,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 5d064456c40f7c34690dc0c9d079accc
+      Hash: f7ef6c4db588ce58b43933ef59e52e0a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: IntroSunScript
@@ -1035,8 +1134,15 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: AutoMobileShaderSwitch
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BackToMenue
   platform: 13
   scenePathNames:
   - Assets/_Scenes/ZenithCorpsIntro.unity
+  - Assets/_Scenes/MainMenue.unity
   - Assets/_Scenes/MWSMainGameplay.unity
   playerPath: C:/Users/kaide/Documents/Android-Builds/Unity/WordWrecker.apk

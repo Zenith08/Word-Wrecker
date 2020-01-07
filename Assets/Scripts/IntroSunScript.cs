@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class IntroSunScript : MonoBehaviour {
 
 	public int speed = 45;
+    public string nextLevel = "MainMenue";
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +16,7 @@ public class IntroSunScript : MonoBehaviour {
 //		Debug.Log (transform.eulerAngles.x);
 		if (transform.eulerAngles.x < 32 && transform.eulerAngles.x > 30) {
 			if(WordDictionaryHandler.isDictionaryReady ()){
-				SceneManager.LoadScene("MWSMainGameplay", LoadSceneMode.Single);
+				SceneManager.LoadScene(nextLevel, LoadSceneMode.Single);
 			}
 		}else{
 			transform.Rotate (Vector3.right * Time.deltaTime * speed);

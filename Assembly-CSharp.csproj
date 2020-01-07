@@ -62,12 +62,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BackToMenue.cs" />
     <Compile Include="Assets\Scripts\ButtonHolder.cs" />
     <Compile Include="Assets\Scripts\ButtonScript.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\GameControler.cs" />
+    <Compile Include="Assets\Scripts\GameData.cs" />
     <Compile Include="Assets\Scripts\IntroSunScript.cs" />
     <Compile Include="Assets\Scripts\Keys.cs" />
+    <Compile Include="Assets\Scripts\MenueManager.cs" />
     <Compile Include="Assets\Scripts\SaveGameHandler.cs" />
     <Compile Include="Assets\Scripts\ScalabilityControler.cs" />
     <Compile Include="Assets\Scripts\SmokeControler.cs" />

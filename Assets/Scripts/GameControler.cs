@@ -42,6 +42,8 @@ public class GameControler : MonoBehaviour {
     private int pendingTime = 0;
     private List<Vector2> lettersUsed;
 
+    private GameData data;
+
     // Use this for initialization
     void Start () {
 		debugText.text = "GS = 0";
@@ -50,11 +52,20 @@ public class GameControler : MonoBehaviour {
 			board [i] = new List<TextScript> (15);
 		}
 
-		loadSaveGame = saveGameHandler.hasSaveGame (DIFFICULTY);
-		if (loadSaveGame) {
-			score = saveGameHandler.getScoreFor (DIFFICULTY);
-			scoreDisplay.text = "Score: " + score;
-		}
+        data = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
+        DIFFICULTY = data.DIFFICULTY;
+
+        if(saveGameHandler.hasSaveGame(DIFFICULTY) && data.LOAD_SAVE)
+        {
+            loadSaveGame = true;
+            score = saveGameHandler.getScoreFor(DIFFICULTY);
+            scoreDisplay.text = "Score: " + score;
+        }
+        else
+        {
+            loadSaveGame = false;
+        }
     }
     
 	int waitTime = 1;
@@ -212,29 +223,7 @@ public class GameControler : MonoBehaviour {
                 }
             }
             //End one letter bug fix
-            //Difficulty implementation
-            if(lettersUsed.Count == 1) //1 letter words are only allowed on easy difficulty
-            {
-                if (DIFFICULTY > EASY) //Easy = 0 so > EASY makes sense.
-                {
-                    //Don't allow word
-                    debugText.text = "PW: " + word; //This is needed so that the callback understands what it's doing
-                    isPendingWord = true;
-                    pendingTime = PendingTimeout;
-                    validWordCallback(false);
-                }
-                else
-                {
-                    if (word.Equals("A") || word.Equals("I")) //These are the only actual 1 letter words so we can just allow them.
-                    {
-                        debugText.text = "PW: " + word; //Also for the callback to make sense.
-                        isPendingWord = true;
-                        pendingTime = PendingTimeout;
-                        validWordCallback(true);
-                    }
-                }
-            }
-            else //If its a more than one letter word we can let the dictionary deal with it.
+            if (!DifficultyCheck()) //If its a more than one letter word we can let the dictionary deal with it.
             {
                 //Activate async call
                 debugText.text = "PW: " + word;
@@ -246,6 +235,52 @@ public class GameControler : MonoBehaviour {
             }
         }
 	}
+
+    //True if the word was handled by difficulty whether or not it was allowed
+    private bool DifficultyCheck()
+    {
+        if (lettersUsed.Count == 1) //1 letter words are only allowed on easy difficulty and even then only "a" and "I"
+        {
+            if (DIFFICULTY > EASY) //Easy = 0 so > EASY makes sense.
+            {
+                //Don't allow word because 1 letter words are not allowed on difficulty Normal or higher
+                RejectWord();
+                return true;
+            }
+            else
+            {
+                if (word.Equals("A") || word.Equals("I")) //These are the only actual 1 letter words so we can just allow them.
+                {
+                    debugText.text = "PW: " + word; //Also for the callback to make sense.
+                    isPendingWord = true;
+                    pendingTime = PendingTimeout;
+                    validWordCallback(true);
+                    return true;
+                }
+            }
+        }
+        else if (lettersUsed.Count == 2)
+        {
+            if(DIFFICULTY <= NORMAL)
+            {
+                return false;
+            }
+            else
+            {
+                RejectWord(); //So on hard 2 letter words are rejected.
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void RejectWord()
+    {
+        debugText.text = "PW: " + word; //This is needed so that the callback understands what it's doing
+        isPendingWord = true;
+        pendingTime = PendingTimeout;
+        validWordCallback(false);
+    }
 
     public void validWordCallback(bool validWord)
     {
