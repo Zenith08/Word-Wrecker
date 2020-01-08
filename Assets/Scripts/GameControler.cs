@@ -51,21 +51,29 @@ public class GameControler : MonoBehaviour {
 		for (int i = 0; i < board.Length; i++) {
 			board [i] = new List<TextScript> (15);
 		}
+        GameObject controller = GameObject.FindWithTag("GameData");
 
-        data = GameObject.FindWithTag("GameData").GetComponent<GameData>();
-
-        DIFFICULTY = data.DIFFICULTY;
-
-        if(saveGameHandler.hasSaveGame(DIFFICULTY) && data.LOAD_SAVE)
+        if(controller != null)
         {
-            loadSaveGame = true;
-            score = saveGameHandler.getScoreFor(DIFFICULTY);
-            scoreDisplay.text = "Score: " + score;
+            data = controller.GetComponent<GameData>();
+            DIFFICULTY = data.DIFFICULTY;
+
+            if (saveGameHandler.hasSaveGame(DIFFICULTY) && data.LOAD_SAVE)
+            {
+                loadSaveGame = true;
+                score = saveGameHandler.getScoreFor(DIFFICULTY);
+                scoreDisplay.text = "Score: " + score;
+            }
+            else
+            {
+                loadSaveGame = false;
+            }
         }
         else
         {
-            loadSaveGame = false;
+            loadSaveGame = true;
         }
+        
     }
     
 	int waitTime = 1;
@@ -119,11 +127,11 @@ public class GameControler : MonoBehaviour {
 
     public void setLetterHighlighted(int x, int y)
     {
-        getFromBoard(x, y).setHighlighted(true);
-        highlighted.Add(getFromBoard(x, y));
+        GetFromBoard(x, y).setHighlighted(true);
+        highlighted.Add(GetFromBoard(x, y));
     }
 
-    private void dehighlight()
+    public void Dehighlight()
     {
         //Unhighlight all letters first
         foreach (TextScript letter in highlighted)
@@ -134,7 +142,7 @@ public class GameControler : MonoBehaviour {
         highlighted.Clear();
     }
 		
-	private TextScript getFromBoard(int x, int y){
+	public TextScript GetFromBoard(int x, int y){
 		return board [x] [y];
 	}
 
@@ -175,7 +183,7 @@ public class GameControler : MonoBehaviour {
             int nADeltaX = xFinal - ax;
             int nADeltaY = yFinal - ay;
 
-            dehighlight();
+            Dehighlight();
             //Now collect letters
 
             //Get all the letters of the selected word
