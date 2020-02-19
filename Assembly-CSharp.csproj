@@ -78,9 +78,10 @@
     <Compile Include="Assets\Scripts\TouchHandler.cs" />
     <Compile Include="Assets\Scripts\WordDictionaryHandler.cs" />
     <None Include="Assets\ZGONAssets\Shared\Shaders\ZGONBumpedDetailSpec_01.shader" />
+    <None Include="Assets\Resources\words_small.txt" />
     <None Include="Assets\ZGONAssets\Modern_ConcreteBuildingExt_01\readme.txt" />
     <None Include="Assets\ZGONAssets\Modern_ConcreteBuildingExt_01\Modern_ConcreteBuildingExt_01.xml" />
-    <None Include="Assets\Dictionaries\words_alpha_parsable.txt" />
+    <None Include="Assets\Resources\words_alpha_parsable.txt" />
     <None Include="Assets\ZGONAssets\Shared\Shaders\ZGONShaderOps.cginc" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/MobileWordSearch/Mobile Word Search/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

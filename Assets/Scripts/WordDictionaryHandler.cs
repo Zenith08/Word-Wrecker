@@ -14,13 +14,15 @@ public static class WordDictionaryHandler {
 	//This needs to be initalized in the code.
 	public static Dictionary<char, int> scores = new Dictionary<char, int> ();
 
+    private static HashSet<string> dictionary;
+
     //Oxford API
     //CRITICAL: Move api keys to different file for gitignoring.
     //private static string oxid = Keys.oxford_api_id;
     //private static string oxkey = Keys.oxford_api_key;
-    private static string oxid = "", oxkey = "";
-    private static string PrimeUrl = "https://od-api.oxforddictionaries.com/api/v2/entries/en/";
-    private static string lemmas = "https://od-api.oxforddictionaries.com/api/v2/lemmas/en/";
+    //private static readonly string oxid = "", oxkey = "";
+    //private static readonly string PrimeUrl = "https://od-api.oxforddictionaries.com/api/v2/entries/en/";
+    //private static readonly string lemmas = "https://od-api.oxforddictionaries.com/api/v2/lemmas/en/";
 
     public static void initWordsAsync(){
 		Thread asyncLoader = new Thread (new ThreadStart(asyncInitalization));
@@ -31,42 +33,26 @@ public static class WordDictionaryHandler {
 		letters = "aaaaaaaaabbccddddeeeeeeeeeeeeffggghhiiiiiiiiijkllllmmnnnnnnooooooooppqrrrrrrssssttttttuuuuvvwwxyyz".ToCharArray ();
 		initScores ();
 
-		dictionaryReady = true; //Has to happen last
+        //Initalize the text file
+        TextAsset pathTxt = (TextAsset)Resources.Load("words_alpha_parsable", typeof(TextAsset));
+        Debug.Log("Read file");
+        
+        dictionary = new HashSet<string>(pathTxt.text.Split('!'));
+
+        dictionaryReady = true; //Has to happen last
 	}
 
-    /*
     public static void CheckLocalDB(string word)
     {
-        string con = "Driver={Words};";
-        //string con = "Provider = Microsoft.ACE.OLEDB.12.0; Data Source = D:/UnityEngine/HelloSql.accdb; Persist Security Info = False;";
-        Debug.Log(con);
-        OdbcConnection oCon = new OdbcConnection(con);
-        try
+        if(!dictionaryReady)
         {
-            oCon.Open();
-            string query = "SELECT * FROM scrabble";
-            OdbcCommand command = new OdbcCommand(query);
-            command.Connection = oCon;
-            command.ExecuteNonQuery();
-            oCon.Close();
+            asyncInitalization();
         }
-        catch(Exception ex)
-        {
-            Debug.Log(ex.ToString());
-        }
-        finally
-        {
-            if(oCon.State != System.Data.ConnectionState.Closed)
-            {
-                oCon.Close();
-            }
-            oCon.Dispose();
-        }
-        SendAsyncResult(false);
+        //Debug.Log("Checking word " + word.ToLower() + " and getting " + dictionary.Contains(word.ToLower()));
+        SendAsyncResult(dictionary.Contains(word.ToLower()));
     }
-    */
 
-    public static async void CheckJavaDB(string word)
+    /*public static async void CheckJavaDB(string word)
     {
         Debug.Log("Checking word " + word);
         string check = word.ToLower();
@@ -93,9 +79,9 @@ public static class WordDictionaryHandler {
         }
 
         Debug.Log("receive data from " + ep.ToString() + " saying " + receivedData.ToString() + " or " + Encoding.ASCII.GetString(receivedData.Buffer));
-    }
+    }*/
 
-    public static async void CheckOxford(string word)
+    /*public static async void CheckOxford(string word)
     {
         string check = word.ToLower();
         //Tests the oxford dictionary:
@@ -145,7 +131,7 @@ public static class WordDictionaryHandler {
                 SendAsyncResult(false);
             }
         }
-    }
+    }*/
 
     private static void SendAsyncResult(bool result)
     {
