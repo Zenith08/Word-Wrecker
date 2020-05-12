@@ -83,7 +83,7 @@ public class GameControler : MonoBehaviour {
 		if (GAME_STATE == 0) {
 			waitTime--;
 			if (waitTime == 0) {
-				waitTime = 30;
+				waitTime = 60;
 				bool rowCreated = false;
 				//Instantiate letters then put them in the array
 				for (int i = 0; i < board.Length; i++) {
@@ -95,7 +95,8 @@ public class GameControler : MonoBehaviour {
 							ts.setLetter (saveGameHandler.getLetterFor(DIFFICULTY, i, board[i].Count)); //The letter will be added after this is called so use Count with no modifiers.
 						} else { //If Load Save Game is false it means we are in normal gameplay and can use normal letter distribution.
 							ts.setLetter (WordDictionaryHandler.getLetters() [Random.Range (0, WordDictionaryHandler.getLetters().Length)]);
-						}
+                            Debug.Log("Generating random letter");
+                        }
 						nextLetter.transform.SetPositionAndRotation (startPoints [i].transform.position, startPoints [i].transform.rotation); 
 						//					nextLetter.GetComponent<Rigidbody>().position = startPoints [i].transform.position;
 						board [i].Add (ts);

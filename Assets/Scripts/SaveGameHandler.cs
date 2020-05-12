@@ -30,6 +30,7 @@ public class SaveGameHandler {
 
 	public bool hasSaveGame(int difficulty){
 		int exists = PlayerPrefs.GetInt (SAVE_GAME_USED_KEY.Replace ("!", difficulty.ToString ()));
+        Debug.Log("Checked pref value " + SAVE_GAME_USED_KEY.Replace("!", difficulty.ToString()) + " and got " + PlayerPrefs.GetInt(SAVE_GAME_USED_KEY.Replace("!", difficulty.ToString())));
 		if (exists == 1) {
 			return true;
 		} else {

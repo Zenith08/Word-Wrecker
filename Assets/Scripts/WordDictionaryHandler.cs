@@ -8,12 +8,13 @@ using System.Net.Sockets;
 public static class WordDictionaryHandler {
     
 	public static bool dictionaryReady = false;
-    
-	private static char[] letters;
 
 	//This needs to be initalized in the code.
 	public static Dictionary<char, int> scores = new Dictionary<char, int> ();
 
+    public static readonly string path = "dict_short";
+
+    private static char[] letters;
     private static HashSet<string> dictionary;
 
     //Oxford API
@@ -34,7 +35,7 @@ public static class WordDictionaryHandler {
 		initScores ();
 
         //Initalize the text file
-        TextAsset pathTxt = (TextAsset)Resources.Load("words_alpha_parsable", typeof(TextAsset));
+        TextAsset pathTxt = (TextAsset)Resources.Load(path, typeof(TextAsset));
         Debug.Log("Read file");
         
         dictionary = new HashSet<string>(pathTxt.text.Split('!'));
