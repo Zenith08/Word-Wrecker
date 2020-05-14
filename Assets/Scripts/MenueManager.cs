@@ -72,7 +72,7 @@ public class MenueManager : MonoBehaviour
 
     public void TutorialMode()
     {
-        Debug.Log("No");
+        SceneManager.LoadScene("TutorialLevel", LoadSceneMode.Single);
     }
 
     public void EasyMode()

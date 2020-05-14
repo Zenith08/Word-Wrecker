@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\SmokeControler.cs" />
     <Compile Include="Assets\Scripts\TextScript.cs" />
     <Compile Include="Assets\Scripts\TouchHandler.cs" />
+    <Compile Include="Assets\Scripts\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\WordDictionaryHandler.cs" />
     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
     <None Include="Assets\Resources\dict_short.txt" />

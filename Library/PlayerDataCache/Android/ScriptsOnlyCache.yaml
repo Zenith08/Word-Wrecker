@@ -14,6 +14,7 @@ ScriptsOnlyBuild:
     - MenueManager
     - TextScript
     - TouchHandler
+    - TutorialManager
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
@@ -46,6 +47,8 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.Text
     - UnityEngine.UI.VerticalLayoutGroup
+    com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
   sceneClasses:
     Assets/_Scenes/MWSMainGameplay.unity:
     - Class: 1
@@ -167,6 +170,65 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13480}
     - Class: 114
       Script: {instanceID: 14028}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/_Scenes/TutorialLevel.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 64
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11306}
+    - Class: 114
+      Script: {instanceID: 11558}
+    - Class: 114
+      Script: {instanceID: 11616}
+    - Class: 114
+      Script: {instanceID: 12180}
+    - Class: 114
+      Script: {instanceID: 12808}
+    - Class: 114
+      Script: {instanceID: 13480}
+    - Class: 114
+      Script: {instanceID: 14028}
+    - Class: 114
+      Script: {instanceID: 18220}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1151,9 +1213,16 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: AutoMobileShaderSwitch
+  - hash:
+      serializedVersion: 2
+      Hash: 172f1cd43d2378f982a4ecb956db68fa
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TutorialManager
   platform: 13
   scenePathNames:
   - Assets/_Scenes/ZenithCorpsIntro.unity
   - Assets/_Scenes/MainMenue.unity
   - Assets/_Scenes/MWSMainGameplay.unity
-  playerPath: C:/Users/kaide/Documents/Android-Builds/Unity/WordWrecker.apk
+  - Assets/_Scenes/TutorialLevel.unity
+  playerPath: C:/Users/kaide/Documents/Android-Builds/WordWrecker.apk
