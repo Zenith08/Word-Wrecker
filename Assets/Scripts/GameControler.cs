@@ -16,6 +16,9 @@ public class GameControler : MonoBehaviour {
 	//The Score Display
 	public TextMesh scoreDisplay;
 
+    //Prefab for displaying temporary text.
+    public GameObject accentTextRef;
+
 	private int score = 0;
 
 	//State 0 = Starting, State 1 = Playable, State 2 = somthing else.
@@ -71,7 +74,7 @@ public class GameControler : MonoBehaviour {
         }
         else
         {
-            loadSaveGame = true;
+            loadSaveGame = false;
         }
         
     }
@@ -95,10 +98,10 @@ public class GameControler : MonoBehaviour {
 							ts.setLetter (saveGameHandler.getLetterFor(DIFFICULTY, i, board[i].Count)); //The letter will be added after this is called so use Count with no modifiers.
 						} else { //If Load Save Game is false it means we are in normal gameplay and can use normal letter distribution.
 							ts.setLetter (WordDictionaryHandler.getLetters() [Random.Range (0, WordDictionaryHandler.getLetters().Length)]);
-                            Debug.Log("Generating random letter");
+                            //Debug.Log("Generating random letter");
                         }
 						nextLetter.transform.SetPositionAndRotation (startPoints [i].transform.position, startPoints [i].transform.rotation); 
-						//					nextLetter.GetComponent<Rigidbody>().position = startPoints [i].transform.position;
+						//nextLetter.GetComponent<Rigidbody>().position = startPoints [i].transform.position;
 						board [i].Add (ts);
 						rowCreated = true;
 					}
@@ -115,7 +118,7 @@ public class GameControler : MonoBehaviour {
                 pendingTime--;
                 if(pendingTime <= 0)
                 {
-                    Debug.Log("Failed API Call for " + word);
+                    //Debug.Log("Failed API Call for " + word);
                     foreach(Vector2 v in lettersUsed)
                     {
                         board[(int)v.x][(int)v.y].setFailiureState(true);
@@ -298,22 +301,57 @@ public class GameControler : MonoBehaviour {
             debugText.text = "V " + word;
             //Score the word
             char[] letters = word.ToLower().ToCharArray();
+
+            //Apply Multipliers
+            int gainedScore = 0;
             foreach (char c in letters)
             {
-                score += WordDictionaryHandler.getScores()[c];
+                gainedScore += WordDictionaryHandler.getScores()[c];
             }
+            //Debug.Log("Generating Accent Text");
+            //DisplayAccentText(lettersUsed[0].x, lettersUsed[0].y, "AccentText");
+            string accent = "";
+            if (letters.Length == 4)
+            {
+                accent = "X2";
+                gainedScore *= 2;
+            }
+            else if(letters.Length == 5)
+            {
+                gainedScore *= 3;
+                accent = "X3";
+            }
+            else if(letters.Length >= 6)
+            {
+                gainedScore *= 4;
+                accent = "X4";
+            }
+
+            if (accent != "")
+            {
+                if (lettersUsed[0].x > lettersUsed[lettersUsed.Count -1].x)
+                {
+                    DisplayAccentText(lettersUsed[lettersUsed.Count - 1].x, lettersUsed[lettersUsed.Count - 1].y, accent);
+                }
+                else
+                {
+                    DisplayAccentText(lettersUsed[0].x, lettersUsed[0].y, "X2");
+                }
+            }
+
+            score += gainedScore;
             scoreDisplay.text = "Score: " + score;
             //Then destroy the letters
             //If the word goes up then go backwards
             //TODO Still Broken, maybe not
-            Debug.Log("LettersUsed.Count = " + lettersUsed.Count);
+            //Debug.Log("LettersUsed.Count = " + lettersUsed.Count);
 
             if (lettersUsed[lettersUsed.Count - 1].y < lettersUsed[0].y)
             { //The backwards loop
                 for (int i = 0; i < lettersUsed.Count; i++)
                 {
-                    Debug.Log("D L Loop " + i + " address " + i);
-                    Debug.Log("Value: " + lettersUsed[i].x + ", " + lettersUsed[i].y);
+                    //Debug.Log("D L Loop " + i + " address " + i);
+                    //Debug.Log("Value: " + lettersUsed[i].x + ", " + lettersUsed[i].y);
 
                     int destroyX = (int)lettersUsed[i].x;
                     int destroyY = (int)lettersUsed[i].y;
@@ -348,6 +386,20 @@ public class GameControler : MonoBehaviour {
                 board[(int)v.x][(int)v.y].setFailiureState(false);
             }
         }
+    }
+
+    public void DisplayAccentText(float boardX, float boardY, string text)
+    {
+        int destroyX = (int)boardX;
+        int destroyY = (int)boardY;
+
+        Transform targetPos = board[destroyX][destroyY].gameObject.transform;
+
+        GameObject accent = Instantiate(accentTextRef);
+        AccentText ts = accent.GetComponent<AccentText>();
+        //nextLetter.transform.SetPositionAndRotation(startPoints[i].transform.position, startPoints[i].transform.rotation);
+        ts.text = text;
+        accent.transform.SetPositionAndRotation(new Vector3(targetPos.position.x, targetPos.position.y, targetPos.position.z - 5), targetPos.rotation);
     }
 
 	public List<TextScript>[] getBoard(){

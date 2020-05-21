@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp-firstpass.dll:
     - UnityStandardAssets.Water.WaterBasic
     Assembly-CSharp.dll:
+    - AccentText
     - BackToMenue
     - ButtonHolder
     - ButtonScript
@@ -104,13 +105,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13426}
     - Class: 114
-      Script: {instanceID: 13482}
+      Script: {instanceID: 13428}
     - Class: 114
-      Script: {instanceID: 13784}
+      Script: {instanceID: 13484}
     - Class: 114
-      Script: {instanceID: 13848}
+      Script: {instanceID: 13786}
     - Class: 114
-      Script: {instanceID: 14030}
+      Script: {instanceID: 13850}
+    - Class: 114
+      Script: {instanceID: 14032}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -169,11 +172,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12928}
     - Class: 114
-      Script: {instanceID: 13482}
+      Script: {instanceID: 13484}
     - Class: 114
-      Script: {instanceID: 13544}
+      Script: {instanceID: 13546}
     - Class: 114
-      Script: {instanceID: 14030}
+      Script: {instanceID: 14032}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -234,9 +237,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12948}
     - Class: 114
-      Script: {instanceID: 13482}
+      Script: {instanceID: 13484}
     - Class: 114
-      Script: {instanceID: 14030}
+      Script: {instanceID: 14032}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -289,7 +292,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13152}
     - Class: 114
-      Script: {instanceID: 13848}
+      Script: {instanceID: 13850}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 121
@@ -455,7 +458,7 @@ ScriptsOnlyBuild:
     className: Hose
   - hash:
       serializedVersion: 2
-      Hash: c84e6c8a0e419a2575ecdeba23fcf9e4
+      Hash: 7e47ac2bbc5db6f9207e612fd14ca7ea
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameControler
@@ -987,6 +990,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TextScript
+  - hash:
+      serializedVersion: 2
+      Hash: 474862791d54fd339d1c3d85456c22a6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AccentText
   - hash:
       serializedVersion: 2
       Hash: 5f1752ed2092162f016c19510c28a8b9
