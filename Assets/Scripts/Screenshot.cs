@@ -2,7 +2,7 @@
 
 public class Screenshot : MonoBehaviour
 {
-    private Camera camera;
+    private Camera targetCamera;
     private static Screenshot instance;
     private bool takeScreenshotNextFrame;
 
@@ -11,7 +11,7 @@ public class Screenshot : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        camera = gameObject.GetComponent<Camera>();
+        targetCamera = gameObject.GetComponent<Camera>();
     }
 
     private void OnPostRender()
@@ -19,7 +19,7 @@ public class Screenshot : MonoBehaviour
         if(takeScreenshotNextFrame)
         {
             takeScreenshotNextFrame = false;
-            RenderTexture renderTexture = camera.targetTexture;
+            RenderTexture renderTexture = targetCamera.targetTexture;
             Texture2D renderResult = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.ARGB32, false);
             Rect rect = new Rect(0, 0, renderTexture.width, renderTexture.height);
             renderResult.ReadPixels(rect, 0, 0);
@@ -28,7 +28,7 @@ public class Screenshot : MonoBehaviour
             System.IO.File.WriteAllBytes(Application.dataPath + "/camerascreenshot.png", bytearray);
             Debug.Log("Screenshot captured");
             RenderTexture.ReleaseTemporary(renderTexture);
-            camera.targetTexture = null;
+            targetCamera.targetTexture = null;
         }
     }
 
@@ -40,7 +40,7 @@ public class Screenshot : MonoBehaviour
 
     private void TakeScreenshot(int width, int height)
     {
-        camera.targetTexture = RenderTexture.GetTemporary(width, height, 16);
+        targetCamera.targetTexture = RenderTexture.GetTemporary(width, height, 16);
         takeScreenshotNextFrame = true;
     }
 

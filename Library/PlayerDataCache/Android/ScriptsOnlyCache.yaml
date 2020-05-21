@@ -1,7 +1,6 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp-firstpass.dll:
-    - UnityStandardAssets.Water.Water
     - UnityStandardAssets.Water.WaterBasic
     Assembly-CSharp.dll:
     - BackToMenue
@@ -12,6 +11,7 @@ ScriptsOnlyBuild:
     - GameData
     - IntroSunScript
     - MenueManager
+    - Screenshot
     - TextScript
     - TouchHandler
     - TutorialManager
@@ -102,15 +102,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12808}
     - Class: 114
-      Script: {instanceID: 13424}
+      Script: {instanceID: 13426}
     - Class: 114
-      Script: {instanceID: 13480}
+      Script: {instanceID: 13482}
     - Class: 114
-      Script: {instanceID: 13782}
+      Script: {instanceID: 13784}
     - Class: 114
-      Script: {instanceID: 13846}
+      Script: {instanceID: 13848}
     - Class: 114
-      Script: {instanceID: 14028}
+      Script: {instanceID: 14030}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -146,6 +146,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
@@ -167,9 +169,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12928}
     - Class: 114
-      Script: {instanceID: 13480}
+      Script: {instanceID: 13482}
     - Class: 114
-      Script: {instanceID: 14028}
+      Script: {instanceID: 13544}
+    - Class: 114
+      Script: {instanceID: 14030}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -185,6 +189,8 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
+      Script: {instanceID: 0}
+    - Class: 258
       Script: {instanceID: 0}
     Assets/_Scenes/TutorialLevel.unity:
     - Class: 1
@@ -209,6 +215,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
@@ -224,11 +232,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12808}
     - Class: 114
-      Script: {instanceID: 13480}
+      Script: {instanceID: 12948}
     - Class: 114
-      Script: {instanceID: 14028}
+      Script: {instanceID: 13482}
     - Class: 114
-      Script: {instanceID: 18220}
+      Script: {instanceID: 14030}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -244,6 +252,8 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
+      Script: {instanceID: 0}
+    - Class: 258
       Script: {instanceID: 0}
     Assets/_Scenes/ZenithCorpsIntro.unity:
     - Class: 1
@@ -277,11 +287,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12800}
     - Class: 114
-      Script: {instanceID: 13080}
+      Script: {instanceID: 13152}
     - Class: 114
-      Script: {instanceID: 13150}
-    - Class: 114
-      Script: {instanceID: 13846}
+      Script: {instanceID: 13848}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 121
@@ -861,6 +869,12 @@ ScriptsOnlyBuild:
     className: NetworkStartPosition
   - hash:
       serializedVersion: 2
+      Hash: 172f1cd43d2378f982a4ecb956db68fa
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TutorialManager
+  - hash:
+      serializedVersion: 2
       Hash: 97a580c59cad3623a01bbf5fb2d7fa93
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Water
@@ -1213,12 +1227,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: AutoMobileShaderSwitch
-  - hash:
-      serializedVersion: 2
-      Hash: 172f1cd43d2378f982a4ecb956db68fa
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: TutorialManager
   platform: 13
   scenePathNames:
   - Assets/_Scenes/ZenithCorpsIntro.unity

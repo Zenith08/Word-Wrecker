@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
-using System.Net;
-using System.Text;
 using UnityEngine;
-using System.Net.Sockets;
 
 public static class WordDictionaryHandler {
     
@@ -32,7 +29,7 @@ public static class WordDictionaryHandler {
 
 	public static void asyncInitalization(){
 		letters = "aaaaaaaaabbccddddeeeeeeeeeeeeffggghhiiiiiiiiijkllllmmnnnnnnooooooooppqrrrrrrssssttttttuuuuvvwwxyyz".ToCharArray ();
-		initScores ();
+		InitScores ();
 
         //Initalize the text file
         TextAsset pathTxt = (TextAsset)Resources.Load(path, typeof(TextAsset));
@@ -52,87 +49,6 @@ public static class WordDictionaryHandler {
         //Debug.Log("Checking word " + word.ToLower() + " and getting " + dictionary.Contains(word.ToLower()));
         SendAsyncResult(dictionary.Contains(word.ToLower()));
     }
-
-    /*public static async void CheckJavaDB(string word)
-    {
-        Debug.Log("Checking word " + word);
-        string check = word.ToLower();
-
-        var client = new UdpClient();
-        IPEndPoint ep = new IPEndPoint(IPAddress.Parse("54.172.6.133"), 4445); // endpoint where server is listening
-        client.Connect(ep);
-
-        // send data
-        byte[] bts = Encoding.ASCII.GetBytes(check);
-        client.Send(bts, bts.Length);
-        Debug.Log("Sent request");
-        // then receive data
-        UdpReceiveResult receivedData = await client.ReceiveAsync();
-
-        string res = Encoding.ASCII.GetString(receivedData.Buffer);
-        if(res == "true")
-        {
-            SendAsyncResult(true);
-        }
-        else
-        {
-            SendAsyncResult(false);
-        }
-
-        Debug.Log("receive data from " + ep.ToString() + " saying " + receivedData.ToString() + " or " + Encoding.ASCII.GetString(receivedData.Buffer));
-    }*/
-
-    /*public static async void CheckOxford(string word)
-    {
-        string check = word.ToLower();
-        //Tests the oxford dictionary:
-        //Online to oxford Entries
-        HttpWebRequest req = null;
-        string uri = PrimeUrl + check;
-
-        req = (HttpWebRequest)WebRequest.Create(uri);
-
-        //These are not network credentials, just custom headers
-        req.Headers.Add("app_id", oxid);
-        req.Headers.Add("app_key", oxkey);
-
-        req.Method = WebRequestMethods.Http.Get;
-        req.Accept = "application/json";
-
-        //Tries with lemmas
-        string luri = lemmas + check;
-
-        HttpWebRequest lreq = (HttpWebRequest)WebRequest.Create(luri);
-
-        //These are not network credentials, just custom headers
-        lreq.Headers.Add("app_id", oxid);
-        lreq.Headers.Add("app_key", oxkey);
-
-        lreq.Method = WebRequestMethods.Http.Get;
-        lreq.Accept = "application/json";
-
-        try
-        {
-            await req.GetResponseAsync();
-            //Word exists
-            SendAsyncResult(true);
-        }
-        catch (WebException)
-        {
-            //Word does not exist in entries
-            try
-            {
-                await lreq.GetResponseAsync();
-                //Exists in lemmas
-                SendAsyncResult(true);
-            }
-            catch (WebException)
-            {
-                //Does not exist
-                SendAsyncResult(false);
-            }
-        }
-    }*/
 
     private static void SendAsyncResult(bool result)
     {
@@ -159,7 +75,7 @@ public static class WordDictionaryHandler {
 	}
 
 	//Initalizes the scores for all the letters based on scrabble scoring
-	private static void initScores(){
+	private static void InitScores(){
 		//A - J
 		scores.Add ('a', 1);
 		scores.Add ('b', 3);
