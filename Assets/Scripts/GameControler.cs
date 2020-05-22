@@ -86,7 +86,7 @@ public class GameControler : MonoBehaviour {
 		if (GAME_STATE == 0) {
 			waitTime--;
 			if (waitTime == 0) {
-				waitTime = 60;
+				waitTime = 45;
 				bool rowCreated = false;
 				//Instantiate letters then put them in the array
 				for (int i = 0; i < board.Length; i++) {
