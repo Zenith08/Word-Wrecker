@@ -335,7 +335,7 @@ public class GameControler : MonoBehaviour {
                 }
                 else
                 {
-                    DisplayAccentText(lettersUsed[0].x, lettersUsed[0].y, "X2");
+                    DisplayAccentText(lettersUsed[0].x, lettersUsed[0].y, accent);
                 }
             }
 
