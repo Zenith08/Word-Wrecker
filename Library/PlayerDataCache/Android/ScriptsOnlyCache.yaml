@@ -18,6 +18,8 @@ ScriptsOnlyBuild:
     - TutorialManager
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
+    - UnityEditor.Tilemaps.GridPaletteBrushes
+    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.Rider.Editor.dll:
@@ -1250,4 +1252,4 @@ ScriptsOnlyBuild:
   - Assets/_Scenes/MainMenue.unity
   - Assets/_Scenes/MWSMainGameplay.unity
   - Assets/_Scenes/TutorialLevel.unity
-  playerPath: C:/Users/kaide/Documents/Android-Builds/WordWrecker.apk
+  playerPath: C:/Users/kaide/Documents/Android-Builds/WordWrecker-4.aab
