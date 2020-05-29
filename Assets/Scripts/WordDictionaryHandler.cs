@@ -28,7 +28,7 @@ public static class WordDictionaryHandler {
 	}
 
 	public static void asyncInitalization(){
-		letters = "aaaaaaaaabbbcccddddeeeeeeeeeeeeeffggggghhhiiiiiiiiijjkklllllmmmnnnnnnooooooooppqrrrrrrssssttttttuuvvwwxyyz".ToCharArray ();
+		letters = "aaaaaaaaaabbbccddddeeeeeeeeeeeeeffggggghhhiiiiiiiiiijkklllllmmmmnnnnnnooooooooopppqrrrrrrssssstttttttuuvwwxyyz".ToCharArray ();
 		InitScores ();
 
         //Initalize the text file
