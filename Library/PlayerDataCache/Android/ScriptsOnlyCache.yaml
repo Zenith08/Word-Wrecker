@@ -474,7 +474,7 @@ ScriptsOnlyBuild:
     className: Hose
   - hash:
       serializedVersion: 2
-      Hash: 7e47ac2bbc5db6f9207e612fd14ca7ea
+      Hash: 1d584d3d63f5d2bc815119f239a5908d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameControler
@@ -1282,4 +1282,4 @@ ScriptsOnlyBuild:
   - Assets/_Scenes/MainMenue.unity
   - Assets/_Scenes/MWSMainGameplay.unity
   - Assets/_Scenes/TutorialLevel.unity
-  playerPath: C:/Users/kaide/Documents/Android-Builds/WordWrecker-6.aab
+  playerPath: C:/Users/kaide/Documents/Android-Builds/WordWrecker-7.aab

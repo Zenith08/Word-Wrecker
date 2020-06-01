@@ -48,8 +48,8 @@ public class GameControler : MonoBehaviour {
     private List<Vector2> lettersUsed;
 
     private GameData data;
-
-    public string online_words = "https://raw.githubusercontent.com/Zenith08/mws-added-words/master/new-includes.txt";
+    
+    public string versions = "https://raw.githubusercontent.com/Zenith08/mws-added-words/master/versions.txt";
 
     // Use this for initialization
     void Start () {
@@ -103,7 +103,7 @@ public class GameControler : MonoBehaviour {
 						if (loadSaveGame) {
 							ts.setLetter (saveGameHandler.getLetterFor(DIFFICULTY, i, board[i].Count)); //The letter will be added after this is called so use Count with no modifiers.
 						} else { //If Load Save Game is false it means we are in normal gameplay and can use normal letter distribution.
-							ts.setLetter (WordDictionaryHandler.getLetters() [Random.Range (0, WordDictionaryHandler.getLetters().Length)]);
+							ts.setLetter (WordDictionaryHandler.getLetters() [UnityEngine.Random.Range (0, WordDictionaryHandler.getLetters().Length)]);
                             //Debug.Log("Generating random letter");
                         }
 						nextLetter.transform.SetPositionAndRotation (startPoints [i].transform.position, startPoints [i].transform.rotation); 
@@ -422,20 +422,23 @@ public class GameControler : MonoBehaviour {
         if (Application.internetReachability != NetworkReachability.NotReachable)
         {
             Debug.Log("Internet available");
-            StartCoroutine(GetExtraWords());
+            debugText.text = "Internet";
+            StartCoroutine(CheckAvailableVersions());
             //Debug.Log("Returning thread");
         }
         else
         {
+            debugText.text = "No internet";
             Debug.Log("Internet not available");
         }
     }
 
-    public IEnumerator GetExtraWords()
+    public IEnumerator CheckAvailableVersions()
     {
         //Debug.Log("Preparing to send request");
-        UnityWebRequest www = UnityWebRequest.Get(online_words);
+        UnityWebRequest www = UnityWebRequest.Get(versions);
         //Debug.Log("Yeilding to web request");
+        debugText.text = "versions";
         yield return www.SendWebRequest();
         //Debug.Log("Returned form yield");
         if (www.isNetworkError || www.isHttpError)
@@ -444,14 +447,44 @@ public class GameControler : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Network Success");
-            //Debug.Log(www.downloadHandler.text);
+            Debug.Log("Versions Success");
+            Debug.Log(www.downloadHandler.text);
+            string[] versions = www.downloadHandler.text.Split('\n');
+            for(int i = 0; i < versions.Length; i++)
+            {
+                //Debug.Log("Checking version " + versions[i]);
+                //Debug.Log("Int value reads " + versions[i].Split('@')[0]);
+                int includeLevel = int.Parse(versions[i].Split('@')[0]);
+                int submits = 0;
+                if(includeLevel > WordDictionaryHandler.VERSION)
+                {
+                    submits++;
+                    StartCoroutine(GetExtraWords(versions[i].Split('@')[1]));
+                }
+                debugText.text = submits + " Pulled";
+            }
+        }
+    }
+
+    public IEnumerator GetExtraWords(string url)
+    {
+        Debug.Log("Preparing to send request " + url);
+        debugText.text = url;
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        //Debug.Log("Yeilding to web request");
+        yield return www.SendWebRequest();
+        //Debug.Log("Returned form yield");
+        if (www.isNetworkError || www.isHttpError)
+        {
+            debugText.text = www.error;
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("Extra words Success");
+            Debug.Log(www.downloadHandler.text);
             string[] webwords = www.downloadHandler.text.Split('!');
             WordDictionaryHandler.AddWebLoadedWords(webwords);
-            /*for(int i = 0; i < webwords.Length; i++)
-            {
-                Debug.Log("Word " + i + " is " + webwords[i]);
-            }*/
         }
     }
 }

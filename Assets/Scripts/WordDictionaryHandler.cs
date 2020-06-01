@@ -10,6 +10,7 @@ public static class WordDictionaryHandler {
 	public static Dictionary<char, int> scores = new Dictionary<char, int> ();
 
     public static readonly string path = "dict_short";
+    public static readonly int VERSION = 7;
 
     private static char[] letters;
     private static HashSet<string> dictionary;
