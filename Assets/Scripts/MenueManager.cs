@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class MenueManager : MonoBehaviour
@@ -24,9 +26,8 @@ public class MenueManager : MonoBehaviour
         right = difficultySelect.position;
         center = mainMenue.position;
         left = new Vector3(right.x * -1, right.y);
-        
     }
-
+    
     // Update is called once per frame
     void Update()
     {

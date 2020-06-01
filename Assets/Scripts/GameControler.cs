@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class GameControler : MonoBehaviour {
 	//The board of the game, a 2d array... sort of.
@@ -47,8 +49,13 @@ public class GameControler : MonoBehaviour {
 
     private GameData data;
 
+    public string online_words = "https://raw.githubusercontent.com/Zenith08/mws-added-words/master/new-includes.txt";
+
     // Use this for initialization
     void Start () {
+        //Async thing we can just leave going
+        TryAddWebWords();
+
 		debugText.text = "GS = 0";
 		board = new List<TextScript>[9];
 		for (int i = 0; i < board.Length; i++) {
@@ -76,7 +83,6 @@ public class GameControler : MonoBehaviour {
         {
             loadSaveGame = false;
         }
-        
     }
     
 	int waitTime = 1;
@@ -409,4 +415,43 @@ public class GameControler : MonoBehaviour {
 	public int getPlayerScore(){
 		return score;
 	}
+
+    //Add extra words but do it from a MonoBehaviour Script
+    public void TryAddWebWords()
+    {
+        if (Application.internetReachability != NetworkReachability.NotReachable)
+        {
+            Debug.Log("Internet available");
+            StartCoroutine(GetExtraWords());
+            //Debug.Log("Returning thread");
+        }
+        else
+        {
+            Debug.Log("Internet not available");
+        }
+    }
+
+    public IEnumerator GetExtraWords()
+    {
+        //Debug.Log("Preparing to send request");
+        UnityWebRequest www = UnityWebRequest.Get(online_words);
+        //Debug.Log("Yeilding to web request");
+        yield return www.SendWebRequest();
+        //Debug.Log("Returned form yield");
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log("Network Success");
+            //Debug.Log(www.downloadHandler.text);
+            string[] webwords = www.downloadHandler.text.Split('!');
+            WordDictionaryHandler.AddWebLoadedWords(webwords);
+            /*for(int i = 0; i < webwords.Length; i++)
+            {
+                Debug.Log("Word " + i + " is " + webwords[i]);
+            }*/
+        }
+    }
 }

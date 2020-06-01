@@ -106,4 +106,20 @@ public static class WordDictionaryHandler {
 		scores.Add ('y', 4);
 		scores.Add ('z', 10);
 	}
+
+    public static void AddWebLoadedWords(string[] words)
+    {
+        if (!dictionaryReady)
+        {
+            asyncInitalization();
+        }
+        for (int i = 0; i < words.Length; i++)
+        {
+            if(!dictionary.Contains(words[i]) && !words[i].StartsWith("#"))
+            {
+                //Debug.Log("Adding new word " + words[i]);
+                dictionary.Add(words[i]);
+            }
+        }
+    }
 }
