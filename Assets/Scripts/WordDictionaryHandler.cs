@@ -10,26 +10,18 @@ public static class WordDictionaryHandler {
 	public static Dictionary<char, int> scores = new Dictionary<char, int> ();
 
     public static readonly string path = "dict_short";
-    public static readonly int VERSION = 7;
+    public static readonly int VERSION = 100;
 
     private static char[] letters;
     private static HashSet<string> dictionary;
-
-    //Oxford API
-    //CRITICAL: Move api keys to different file for gitignoring.
-    //private static string oxid = Keys.oxford_api_id;
-    //private static string oxkey = Keys.oxford_api_key;
-    //private static readonly string oxid = "", oxkey = "";
-    //private static readonly string PrimeUrl = "https://od-api.oxforddictionaries.com/api/v2/entries/en/";
-    //private static readonly string lemmas = "https://od-api.oxforddictionaries.com/api/v2/lemmas/en/";
-
+    
     public static void initWordsAsync(){
 		Thread asyncLoader = new Thread (new ThreadStart(asyncInitalization));
 		asyncLoader.Start ();
 	}
 
 	public static void asyncInitalization(){
-		letters = "aaaaaaaaaabbbccddddeeeeeeeeeeeeeffggggghhhiiiiiiiiiijkklllllmmmmnnnnnnooooooooopppqrrrrrrssssstttttttuuvwwxyyz".ToCharArray ();
+		letters = "aaaaaaaaaaabbbccddddeeeeeeeeeeeeeeffggggghhhiiiiiiiiiiijkklllllmmmmnnnnnnooooooooopppqrrrrrrssssstttttttuvwwxyyz".ToCharArray ();
 		InitScores ();
 
         //Initalize the text file
@@ -122,5 +114,10 @@ public static class WordDictionaryHandler {
                 dictionary.Add(words[i]);
             }
         }
+    }
+
+    public static bool HasWordLoaded(string word)
+    {
+        return dictionary.Contains(word);
     }
 }

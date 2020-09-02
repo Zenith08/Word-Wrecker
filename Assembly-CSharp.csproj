@@ -70,7 +70,6 @@
     <Compile Include="Assets\Scripts\GameControler.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
     <Compile Include="Assets\Scripts\IntroSunScript.cs" />
-    <Compile Include="Assets\Scripts\Keys.cs" />
     <Compile Include="Assets\Scripts\MenueManager.cs" />
     <Compile Include="Assets\Scripts\SaveGameHandler.cs" />
     <Compile Include="Assets\Scripts\ScalabilityControler.cs" />

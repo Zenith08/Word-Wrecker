@@ -4,38 +4,41 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class GameControler : MonoBehaviour {
-	//The board of the game, a 2d array... sort of.
-	private List<TextScript>[] board;
+    public static readonly string WORD_KEY = "offline-words";
+    private string savingWords = "";
 
-	//The places the letters start off.
-	public GameObject[] startPoints = new GameObject[9];
-    
-	public GameObject letterRef;
+    //The board of the game, a 2d array... sort of.
+    private List<TextScript>[] board;
 
-	//Temp for testing
-	public TextMesh debugText;
+    //The places the letters start off.
+    public GameObject[] startPoints = new GameObject[9];
 
-	//The Score Display
-	public TextMesh scoreDisplay;
+    public GameObject letterRef;
+
+    //Temp for testing
+    public TextMesh debugText;
+
+    //The Score Display
+    public TextMesh scoreDisplay;
 
     //Prefab for displaying temporary text.
     public GameObject accentTextRef;
 
-	private int score = 0;
+    private int score = 0;
 
-	//State 0 = Starting, State 1 = Playable, State 2 = somthing else.
-	public int GAME_STATE = 0;
+    //State 0 = Starting, State 1 = Playable, State 2 = somthing else.
+    public int GAME_STATE = 0;
 
     //Difficulty 0 = Easy, 1 = Normal, 2 = Hard, 3 = Lunatic, 4 = Somthing else.
     public static readonly int EASY = 0;
     public static readonly int NORMAL = 1;
     public static readonly int HARD = 2;
 
-	public int DIFFICULTY = NORMAL;
+    public int DIFFICULTY = NORMAL;
 
-	private SaveGameHandler saveGameHandler = new SaveGameHandler(); //Really it's just a convenience class.
+    private SaveGameHandler saveGameHandler = new SaveGameHandler(); //Really it's just a convenience class.
 
-	private bool loadSaveGame;
+    private bool loadSaveGame;
 
     //Allows letters to light up when tapped (in theory)
     private List<TextScript> highlighted = new List<TextScript>();
@@ -48,22 +51,22 @@ public class GameControler : MonoBehaviour {
     private List<Vector2> lettersUsed;
 
     private GameData data;
-    
+
     public string versions = "https://raw.githubusercontent.com/Zenith08/mws-added-words/master/versions.txt";
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         //Async thing we can just leave going
         TryAddWebWords();
 
-		debugText.text = "GS = 0";
-		board = new List<TextScript>[9];
-		for (int i = 0; i < board.Length; i++) {
-			board [i] = new List<TextScript> (15);
-		}
+        debugText.text = "GS = 0";
+        board = new List<TextScript>[9];
+        for (int i = 0; i < board.Length; i++) {
+            board[i] = new List<TextScript>(15);
+        }
         GameObject controller = GameObject.FindWithTag("GameData");
 
-        if(controller != null)
+        if (controller != null)
         {
             data = controller.GetComponent<GameData>();
             DIFFICULTY = data.DIFFICULTY;
@@ -84,56 +87,56 @@ public class GameControler : MonoBehaviour {
             loadSaveGame = false;
         }
     }
-    
-	int waitTime = 1;
 
-	// Update is called once per frame
-	void Update () {
-		if (GAME_STATE == 0) {
-			waitTime--;
-			if (waitTime == 0) {
-				waitTime = 45;
-				bool rowCreated = false;
-				//Instantiate letters then put them in the array
-				for (int i = 0; i < board.Length; i++) {
-					if (board [i].Count < 15) {
-						GameObject nextLetter = Instantiate (letterRef);
-						TextScript ts = nextLetter.GetComponent<TextScript> ();
-						//Handles Save Game stuff
-						if (loadSaveGame) {
-							ts.setLetter (saveGameHandler.getLetterFor(DIFFICULTY, i, board[i].Count)); //The letter will be added after this is called so use Count with no modifiers.
-						} else { //If Load Save Game is false it means we are in normal gameplay and can use normal letter distribution.
-							ts.setLetter (WordDictionaryHandler.getLetters() [UnityEngine.Random.Range (0, WordDictionaryHandler.getLetters().Length)]);
+    int waitTime = 1;
+
+    // Update is called once per frame
+    void Update() {
+        if (GAME_STATE == 0) {
+            waitTime--;
+            if (waitTime == 0) {
+                waitTime = 45;
+                bool rowCreated = false;
+                //Instantiate letters then put them in the array
+                for (int i = 0; i < board.Length; i++) {
+                    if (board[i].Count < 15) {
+                        GameObject nextLetter = Instantiate(letterRef);
+                        TextScript ts = nextLetter.GetComponent<TextScript>();
+                        //Handles Save Game stuff
+                        if (loadSaveGame) {
+                            ts.setLetter(saveGameHandler.getLetterFor(DIFFICULTY, i, board[i].Count)); //The letter will be added after this is called so use Count with no modifiers.
+                        } else { //If Load Save Game is false it means we are in normal gameplay and can use normal letter distribution.
+                            ts.setLetter(WordDictionaryHandler.getLetters()[UnityEngine.Random.Range(0, WordDictionaryHandler.getLetters().Length)]);
                             //Debug.Log("Generating random letter");
                         }
-						nextLetter.transform.SetPositionAndRotation (startPoints [i].transform.position, startPoints [i].transform.rotation); 
-						//nextLetter.GetComponent<Rigidbody>().position = startPoints [i].transform.position;
-						board [i].Add (ts);
-						rowCreated = true;
-					}
-				}
-				if (rowCreated == false) {
-					loadSaveGame = false;
-					saveGameHandler.saveData (this);
-					GAME_STATE = 1;
-				}
-			}
-		}else if (GAME_STATE == 1) {
+                        nextLetter.transform.SetPositionAndRotation(startPoints[i].transform.position, startPoints[i].transform.rotation);
+                        //nextLetter.GetComponent<Rigidbody>().position = startPoints [i].transform.position;
+                        board[i].Add(ts);
+                        rowCreated = true;
+                    }
+                }
+                if (rowCreated == false) {
+                    loadSaveGame = false;
+                    saveGameHandler.saveData(this);
+                    GAME_STATE = 1;
+                }
+            }
+        } else if (GAME_STATE == 1) {
             if (isPendingWord)
             {
                 pendingTime--;
-                if(pendingTime <= 0)
+                if (pendingTime <= 0)
                 {
                     //Debug.Log("Failed API Call for " + word);
-                    foreach(Vector2 v in lettersUsed)
+                    foreach (Vector2 v in lettersUsed)
                     {
                         board[(int)v.x][(int)v.y].setFailiureState(true);
                     }
                     isPendingWord = false;
                 }
             }
-		}
-	}
+        }
+    }
 
     public void setLetterHighlighted(int x, int y)
     {
@@ -146,18 +149,18 @@ public class GameControler : MonoBehaviour {
         //Unhighlight all letters first
         foreach (TextScript letter in highlighted)
         {
-            if(letter != null)
+            if (letter != null)
                 letter.setHighlighted(false);
         }
         highlighted.Clear();
     }
-		
-	public TextScript GetFromBoard(int x, int y){
-		return board [x] [y];
-	}
+
+    public TextScript GetFromBoard(int x, int y) {
+        return board[x][y];
+    }
 
     //A is the starting position, B is the final position.
-    public void collectLetters(int ax, int ay, int bx, int by){
+    public void collectLetters(int ax, int ay, int bx, int by) {
         //Then process
         if (!isPendingWord)
         {
@@ -252,7 +255,7 @@ public class GameControler : MonoBehaviour {
                 WordDictionaryHandler.CheckLocalDB(word);
             }
         }
-	}
+    }
 
     //True if the word was handled by difficulty whether or not it was allowed
     private bool DifficultyCheck()
@@ -279,7 +282,7 @@ public class GameControler : MonoBehaviour {
         }
         else if (lettersUsed.Count == 2)
         {
-            if(DIFFICULTY <= NORMAL)
+            if (DIFFICULTY <= NORMAL)
             {
                 return false;
             }
@@ -322,12 +325,12 @@ public class GameControler : MonoBehaviour {
                 accent = "X2";
                 gainedScore *= 2;
             }
-            else if(letters.Length == 5)
+            else if (letters.Length == 5)
             {
                 gainedScore *= 3;
                 accent = "X3";
             }
-            else if(letters.Length >= 6)
+            else if (letters.Length >= 6)
             {
                 gainedScore *= 4;
                 accent = "X4";
@@ -335,7 +338,7 @@ public class GameControler : MonoBehaviour {
 
             if (accent != "")
             {
-                if (lettersUsed[0].x > lettersUsed[lettersUsed.Count -1].x)
+                if (lettersUsed[0].x > lettersUsed[lettersUsed.Count - 1].x)
                 {
                     DisplayAccentText(lettersUsed[lettersUsed.Count - 1].x, lettersUsed[lettersUsed.Count - 1].y, accent);
                 }
@@ -387,7 +390,7 @@ public class GameControler : MonoBehaviour {
         {
             isPendingWord = false;
             debugText.text = "F " + word;
-            foreach(Vector2 v in lettersUsed)
+            foreach (Vector2 v in lettersUsed)
             {
                 board[(int)v.x][(int)v.y].setFailiureState(false);
             }
@@ -408,13 +411,13 @@ public class GameControler : MonoBehaviour {
         accent.transform.SetPositionAndRotation(new Vector3(targetPos.position.x, targetPos.position.y, targetPos.position.z - 5), targetPos.rotation);
     }
 
-	public List<TextScript>[] getBoard(){
-		return board;
-	}
+    public List<TextScript>[] getBoard() {
+        return board;
+    }
 
-	public int getPlayerScore(){
-		return score;
-	}
+    public int getPlayerScore() {
+        return score;
+    }
 
     //Add extra words but do it from a MonoBehaviour Script
     public void TryAddWebWords()
@@ -430,8 +433,18 @@ public class GameControler : MonoBehaviour {
         {
             debugText.text = "No internet";
             Debug.Log("Internet not available");
+
+            if (PlayerPrefs.HasKey(WORD_KEY))
+            {
+                string offlineWords = PlayerPrefs.GetString(WORD_KEY);
+                Debug.Log("Loaded offline words " + offlineWords);
+                AddWordsFromString(offlineWords, '!');
+            }
         }
     }
+
+    private int expectedRegistrations = 0;
+    private int currentRegistrations = 0;
 
     public IEnumerator CheckAvailableVersions()
     {
@@ -450,15 +463,16 @@ public class GameControler : MonoBehaviour {
             Debug.Log("Versions Success");
             Debug.Log(www.downloadHandler.text);
             string[] versions = www.downloadHandler.text.Split('\n');
-            for(int i = 0; i < versions.Length; i++)
+            for (int i = 0; i < versions.Length; i++)
             {
                 //Debug.Log("Checking version " + versions[i]);
                 //Debug.Log("Int value reads " + versions[i].Split('@')[0]);
                 int includeLevel = int.Parse(versions[i].Split('@')[0]);
                 int submits = 0;
-                if(includeLevel > WordDictionaryHandler.VERSION)
+                if (includeLevel > WordDictionaryHandler.VERSION)
                 {
                     submits++;
+                    expectedRegistrations++;
                     StartCoroutine(GetExtraWords(versions[i].Split('@')[1]));
                 }
                 debugText.text = submits + " Pulled";
@@ -483,8 +497,36 @@ public class GameControler : MonoBehaviour {
         {
             Debug.Log("Extra words Success");
             Debug.Log(www.downloadHandler.text);
-            string[] webwords = www.downloadHandler.text.Split('!');
-            WordDictionaryHandler.AddWebLoadedWords(webwords);
+            QueOfflineWords(www.downloadHandler.text);
+            AddWordsFromString(www.downloadHandler.text, '!');
+        }
+    }
+
+    private void AddWordsFromString(string source, char delim)
+    {
+        string[] webwords = source.Split(delim);
+        WordDictionaryHandler.AddWebLoadedWords(webwords);
+    }
+
+    private void QueOfflineWords(string download)
+    {
+        Debug.Log("Preparing words to save " + download);
+        string[] words = download.Split('!');
+        foreach (string s in words)
+        {
+            if (!WordDictionaryHandler.HasWordLoaded(s))
+            {
+                savingWords = savingWords + "!" + s;
+            }
+        }
+        currentRegistrations++;
+        Debug.Log("Recieved " + currentRegistrations + " out of " + expectedRegistrations + " of new words");
+
+        if(currentRegistrations == expectedRegistrations)
+        {
+            Debug.Log("Saving queued words " + savingWords);
+            PlayerPrefs.SetString(WORD_KEY, savingWords);
+            PlayerPrefs.Save();
         }
     }
 }
