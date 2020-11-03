@@ -27,31 +27,15 @@ ScriptsOnlyBuild:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TerrainTools.Editor.dll:
     - UnityEditor.Experimental.TerrainAPI.BillowNoise
-    - UnityEditor.Experimental.TerrainAPI.BridgeTool
-    - UnityEditor.Experimental.TerrainAPI.CloneBrushTool
-    - UnityEditor.Experimental.TerrainAPI.ContrastTool
     - UnityEditor.Experimental.TerrainAPI.FbmFractalType
-    - UnityEditor.Experimental.TerrainAPI.MeshStampTool
     - UnityEditor.Experimental.TerrainAPI.NoiseBlitShaderGenerator
     - UnityEditor.Experimental.TerrainAPI.NoiseFillShaderGenerator
-    - UnityEditor.Experimental.TerrainAPI.NoiseHeightTool
     - UnityEditor.Experimental.TerrainAPI.NoneFractalType
-    - UnityEditor.Experimental.TerrainAPI.PaintHeightTool
-    - UnityEditor.Experimental.TerrainAPI.PaintHolesTool
-    - UnityEditor.Experimental.TerrainAPI.PaintTextureTool
     - UnityEditor.Experimental.TerrainAPI.PerlinNoise
     - UnityEditor.Experimental.TerrainAPI.RidgeNoise
-    - UnityEditor.Experimental.TerrainAPI.SetHeightTool
-    - UnityEditor.Experimental.TerrainAPI.SharpenPeaksTool
-    - UnityEditor.Experimental.TerrainAPI.SlopeFlattenTool
-    - UnityEditor.Experimental.TerrainAPI.SmoothHeightTool
-    - UnityEditor.Experimental.TerrainAPI.StampTool
     - UnityEditor.Experimental.TerrainAPI.StrataFractalType
-    - UnityEditor.Experimental.TerrainAPI.TerraceErosion
-    - UnityEditor.Experimental.TerrainAPI.ThermalErosionTool
     - UnityEditor.Experimental.TerrainAPI.ValueNoise
     - UnityEditor.Experimental.TerrainAPI.VoronoiNoise
-    - UnityEditor.Experimental.TerrainAPI.WindErosionTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -65,8 +49,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.Text
     - UnityEngine.UI.VerticalLayoutGroup
-    com.unity.multiplayer-hlapi.Runtime.dll:
-    - UnityEngine.Networking.NetworkCallbacks
   sceneClasses:
     Assets/_Scenes/MWSMainGameplay.unity:
     - Class: 1
@@ -106,31 +88,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11396}
     - Class: 114
-      Script: {instanceID: 11426}
+      Script: {instanceID: 11430}
     - Class: 114
-      Script: {instanceID: 11440}
+      Script: {instanceID: 11444}
     - Class: 114
-      Script: {instanceID: 11612}
+      Script: {instanceID: 11616}
     - Class: 114
-      Script: {instanceID: 11762}
+      Script: {instanceID: 11766}
     - Class: 114
-      Script: {instanceID: 11778}
+      Script: {instanceID: 11782}
     - Class: 114
-      Script: {instanceID: 12380}
+      Script: {instanceID: 12384}
     - Class: 114
-      Script: {instanceID: 13048}
+      Script: {instanceID: 13054}
     - Class: 114
-      Script: {instanceID: 13782}
+      Script: {instanceID: 13788}
     - Class: 114
-      Script: {instanceID: 13784}
+      Script: {instanceID: 13790}
     - Class: 114
-      Script: {instanceID: 13842}
+      Script: {instanceID: 13848}
     - Class: 114
-      Script: {instanceID: 14180}
+      Script: {instanceID: 14186}
     - Class: 114
-      Script: {instanceID: 14244}
+      Script: {instanceID: 14250}
     - Class: 114
-      Script: {instanceID: 14436}
+      Script: {instanceID: 14442}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -175,23 +157,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11396}
     - Class: 114
-      Script: {instanceID: 11426}
+      Script: {instanceID: 11430}
     - Class: 114
-      Script: {instanceID: 11712}
+      Script: {instanceID: 11716}
     - Class: 114
-      Script: {instanceID: 11718}
+      Script: {instanceID: 11722}
     - Class: 114
-      Script: {instanceID: 11762}
+      Script: {instanceID: 11766}
     - Class: 114
-      Script: {instanceID: 12380}
+      Script: {instanceID: 12384}
     - Class: 114
-      Script: {instanceID: 13232}
+      Script: {instanceID: 13238}
     - Class: 114
-      Script: {instanceID: 13842}
+      Script: {instanceID: 13848}
     - Class: 114
-      Script: {instanceID: 13918}
+      Script: {instanceID: 13924}
     - Class: 114
-      Script: {instanceID: 14436}
+      Script: {instanceID: 14442}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -244,17 +226,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11396}
     - Class: 114
-      Script: {instanceID: 11426}
+      Script: {instanceID: 11430}
     - Class: 114
-      Script: {instanceID: 11762}
+      Script: {instanceID: 11766}
     - Class: 114
-      Script: {instanceID: 12380}
+      Script: {instanceID: 12384}
     - Class: 114
-      Script: {instanceID: 13254}
+      Script: {instanceID: 13260}
     - Class: 114
-      Script: {instanceID: 13842}
+      Script: {instanceID: 13848}
     - Class: 114
-      Script: {instanceID: 14436}
+      Script: {instanceID: 14442}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -303,11 +285,11 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 13098}
+      Script: {instanceID: 12810}
     - Class: 114
-      Script: {instanceID: 13476}
+      Script: {instanceID: 13104}
     - Class: 114
-      Script: {instanceID: 95874}
+      Script: {instanceID: 13482}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 121
@@ -777,6 +759,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: AutoMoveAndRotate
+  - hash:
+      serializedVersion: 2
+      Hash: 25c7c4d5032919bf256ae5dcc2c393c8
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PerspectiveCamController
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1293,16 +1281,10 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: AutoMobileShaderSwitch
-  - hash:
-      serializedVersion: 2
-      Hash: 25c7c4d5032919bf256ae5dcc2c393c8
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PerspectiveCamController
   platform: 13
   scenePathNames:
   - Assets/_Scenes/ZenithCorpsIntro.unity
   - Assets/_Scenes/MainMenue.unity
   - Assets/_Scenes/MWSMainGameplay.unity
   - Assets/_Scenes/TutorialLevel.unity
-  playerPath: D:/Unity Games/Builds/Android/WordWreckerTest.apk
+  playerPath: D:/Unity Games/Builds/Android/WordWrecker-1.4.apk
