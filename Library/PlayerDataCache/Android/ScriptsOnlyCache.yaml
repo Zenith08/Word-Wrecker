@@ -12,6 +12,7 @@ ScriptsOnlyBuild:
     - GameData
     - IntroSunScript
     - MenueManager
+    - PerspectiveCamController
     - Screenshot
     - TextScript
     - TouchHandler
@@ -306,7 +307,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13476}
     - Class: 114
-      Script: {instanceID: 14244}
+      Script: {instanceID: 95874}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 121
@@ -1292,6 +1293,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: AutoMobileShaderSwitch
+  - hash:
+      serializedVersion: 2
+      Hash: 25c7c4d5032919bf256ae5dcc2c393c8
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PerspectiveCamController
   platform: 13
   scenePathNames:
   - Assets/_Scenes/ZenithCorpsIntro.unity

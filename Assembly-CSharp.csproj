@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\GameData.cs" />
     <Compile Include="Assets\Scripts\IntroSunScript.cs" />
     <Compile Include="Assets\Scripts\MenueManager.cs" />
+    <Compile Include="Assets\Scripts\PerspectiveCamController.cs" />
     <Compile Include="Assets\Scripts\SaveGameHandler.cs" />
     <Compile Include="Assets\Scripts\ScalabilityControler.cs" />
     <Compile Include="Assets\Scripts\Screenshot.cs" />
