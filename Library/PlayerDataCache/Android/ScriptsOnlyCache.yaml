@@ -88,31 +88,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11396}
     - Class: 114
-      Script: {instanceID: 11430}
+      Script: {instanceID: 11426}
     - Class: 114
-      Script: {instanceID: 11444}
+      Script: {instanceID: 11440}
     - Class: 114
-      Script: {instanceID: 11616}
+      Script: {instanceID: 11612}
     - Class: 114
-      Script: {instanceID: 11766}
+      Script: {instanceID: 11762}
     - Class: 114
-      Script: {instanceID: 11782}
+      Script: {instanceID: 11778}
     - Class: 114
-      Script: {instanceID: 12384}
+      Script: {instanceID: 12380}
     - Class: 114
-      Script: {instanceID: 13054}
+      Script: {instanceID: 13050}
     - Class: 114
-      Script: {instanceID: 13788}
+      Script: {instanceID: 13784}
     - Class: 114
-      Script: {instanceID: 13790}
+      Script: {instanceID: 13786}
     - Class: 114
-      Script: {instanceID: 13848}
+      Script: {instanceID: 13844}
     - Class: 114
-      Script: {instanceID: 14186}
+      Script: {instanceID: 14182}
     - Class: 114
-      Script: {instanceID: 14250}
+      Script: {instanceID: 14246}
     - Class: 114
-      Script: {instanceID: 14442}
+      Script: {instanceID: 14438}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -157,23 +157,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11396}
     - Class: 114
-      Script: {instanceID: 11430}
+      Script: {instanceID: 11426}
     - Class: 114
-      Script: {instanceID: 11716}
+      Script: {instanceID: 11712}
     - Class: 114
-      Script: {instanceID: 11722}
+      Script: {instanceID: 11718}
     - Class: 114
-      Script: {instanceID: 11766}
+      Script: {instanceID: 11762}
     - Class: 114
-      Script: {instanceID: 12384}
+      Script: {instanceID: 12380}
     - Class: 114
-      Script: {instanceID: 13238}
+      Script: {instanceID: 13234}
     - Class: 114
-      Script: {instanceID: 13848}
+      Script: {instanceID: 13844}
     - Class: 114
-      Script: {instanceID: 13924}
+      Script: {instanceID: 13920}
     - Class: 114
-      Script: {instanceID: 14442}
+      Script: {instanceID: 14438}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -226,17 +226,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11396}
     - Class: 114
-      Script: {instanceID: 11430}
+      Script: {instanceID: 11426}
     - Class: 114
-      Script: {instanceID: 11766}
+      Script: {instanceID: 11762}
     - Class: 114
-      Script: {instanceID: 12384}
+      Script: {instanceID: 12380}
     - Class: 114
-      Script: {instanceID: 13260}
+      Script: {instanceID: 13256}
     - Class: 114
-      Script: {instanceID: 13848}
+      Script: {instanceID: 13844}
     - Class: 114
-      Script: {instanceID: 14442}
+      Script: {instanceID: 14438}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -285,11 +285,11 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 12810}
+      Script: {instanceID: 12806}
     - Class: 114
-      Script: {instanceID: 13104}
+      Script: {instanceID: 13100}
     - Class: 114
-      Script: {instanceID: 13482}
+      Script: {instanceID: 13478}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 121
@@ -1287,4 +1287,4 @@ ScriptsOnlyBuild:
   - Assets/_Scenes/MainMenue.unity
   - Assets/_Scenes/MWSMainGameplay.unity
   - Assets/_Scenes/TutorialLevel.unity
-  playerPath: D:/Unity Games/Builds/Android/WordWrecker-1.4.apk
+  playerPath: D:/Unity Games/Builds/Android/WordWrecker-1.4.aab
