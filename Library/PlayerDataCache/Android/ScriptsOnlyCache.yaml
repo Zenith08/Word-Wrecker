@@ -26,15 +26,31 @@ ScriptsOnlyBuild:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TerrainTools.Editor.dll:
     - UnityEditor.Experimental.TerrainAPI.BillowNoise
+    - UnityEditor.Experimental.TerrainAPI.BridgeTool
+    - UnityEditor.Experimental.TerrainAPI.CloneBrushTool
+    - UnityEditor.Experimental.TerrainAPI.ContrastTool
     - UnityEditor.Experimental.TerrainAPI.FbmFractalType
+    - UnityEditor.Experimental.TerrainAPI.MeshStampTool
     - UnityEditor.Experimental.TerrainAPI.NoiseBlitShaderGenerator
     - UnityEditor.Experimental.TerrainAPI.NoiseFillShaderGenerator
+    - UnityEditor.Experimental.TerrainAPI.NoiseHeightTool
     - UnityEditor.Experimental.TerrainAPI.NoneFractalType
+    - UnityEditor.Experimental.TerrainAPI.PaintHeightTool
+    - UnityEditor.Experimental.TerrainAPI.PaintHolesTool
+    - UnityEditor.Experimental.TerrainAPI.PaintTextureTool
     - UnityEditor.Experimental.TerrainAPI.PerlinNoise
     - UnityEditor.Experimental.TerrainAPI.RidgeNoise
+    - UnityEditor.Experimental.TerrainAPI.SetHeightTool
+    - UnityEditor.Experimental.TerrainAPI.SharpenPeaksTool
+    - UnityEditor.Experimental.TerrainAPI.SlopeFlattenTool
+    - UnityEditor.Experimental.TerrainAPI.SmoothHeightTool
+    - UnityEditor.Experimental.TerrainAPI.StampTool
     - UnityEditor.Experimental.TerrainAPI.StrataFractalType
+    - UnityEditor.Experimental.TerrainAPI.TerraceErosion
+    - UnityEditor.Experimental.TerrainAPI.ThermalErosionTool
     - UnityEditor.Experimental.TerrainAPI.ValueNoise
     - UnityEditor.Experimental.TerrainAPI.VoronoiNoise
+    - UnityEditor.Experimental.TerrainAPI.WindErosionTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
