@@ -1287,4 +1287,4 @@ ScriptsOnlyBuild:
   - Assets/_Scenes/MainMenue.unity
   - Assets/_Scenes/MWSMainGameplay.unity
   - Assets/_Scenes/TutorialLevel.unity
-  playerPath: D:/Unity Games/Builds/Android/WordWrecker-1.4.aab
+  playerPath: D:/Unity Games/Builds/Android/Word-Wrecker-1.4.1.aab
