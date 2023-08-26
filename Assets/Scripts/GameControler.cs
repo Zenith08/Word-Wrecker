@@ -454,7 +454,7 @@ public class GameControler : MonoBehaviour {
         debugText.text = "versions";
         yield return www.SendWebRequest();
         //Debug.Log("Returned form yield");
-        if (www.isNetworkError || www.isHttpError)
+        if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
             Debug.Log(www.error);
         }
@@ -488,7 +488,7 @@ public class GameControler : MonoBehaviour {
         //Debug.Log("Yeilding to web request");
         yield return www.SendWebRequest();
         //Debug.Log("Returned form yield");
-        if (www.isNetworkError || www.isHttpError)
+        if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
             debugText.text = www.error;
             Debug.Log(www.error);

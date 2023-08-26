@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Threading;
+using Unity.Collections;
+using Unity.Jobs;
 using UnityEngine;
 
 public static class WordDictionaryHandler {
@@ -14,23 +16,28 @@ public static class WordDictionaryHandler {
 
     private static char[] letters;
     private static HashSet<string> dictionary;
+	private static string loadedText = "";
     
     public static void initWordsAsync(){
+		TextAsset pathTxt = (TextAsset)Resources.Load(path, typeof(TextAsset));
+		loadedText = pathTxt.text;
 		Thread asyncLoader = new Thread (new ThreadStart(asyncInitalization));
-		asyncLoader.Start ();
+		asyncLoader.Start();
 	}
 
 	public static void asyncInitalization(){
 		letters = "aaaaaaaaaaabbbccddddeeeeeeeeeeeeeeffggggghhhiiiiiiiiiiijkklllllmmmmnnnnnnooooooooopppqrrrrrrssssstttttttuvwwxyyz".ToCharArray ();
-		InitScores ();
+		InitScores();
 
         //Initalize the text file
-        TextAsset pathTxt = (TextAsset)Resources.Load(path, typeof(TextAsset));
+        // TextAsset pathTxt = (TextAsset)Resources.Load(path, typeof(TextAsset));
         Debug.Log("Read file");
-        
-        dictionary = new HashSet<string>(pathTxt.text.Split('!'));
+
+        dictionary = new HashSet<string>(loadedText.Split('!'));
 
         dictionaryReady = true; //Has to happen last
+
+		loadedText = ""; // Let it be garbage collected if we need to.
 	}
 
     public static void CheckLocalDB(string word)
